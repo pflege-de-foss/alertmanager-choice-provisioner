@@ -38,7 +38,7 @@ which includes the grafana Helm chart.
 ```yaml
   extraContainers: |
     - name: alertconfig
-      image: ghcr.io/foss-pflege-de/alertmanager-choice-provisioner:0.1.0
+      image: ghcr.io/pflege-de-foss/alertmanager-choice-provisioner:0.1.0
       env:
     - name: choice
       value: all
