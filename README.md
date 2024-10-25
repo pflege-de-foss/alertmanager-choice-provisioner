@@ -16,12 +16,14 @@ If an error occurs updating the configuration it retries after 10 seconds.
 
 The provisioner is configured by environment variables.
 
-| variable   | value                                               | default                                |
-| ---------- | --------------------------------------------------- | -------------------------------------- |
-| `choice`   | one of `internal`, `all`, `external`                | -                                      |
-| `url`      | base url for configuring alerts admin configuration | `http://localhost:3000/api/vi/ngalert` |
-| `username` | Admin username                                      | `admin`                                |
-| `password` | Admin password                                      | `prom-operator`                        |
+| variable          | value                                               | default                                |
+| ----------------- | --------------------------------------------------- | -------------------------------------- |
+| `choice`          | one of `internal`, `all`, `external`                | -                                      |
+| `url`             | base url for configuring alerts admin configuration | `http://localhost:3000/api/vi/ngalert` |
+| `username`        | Admin username                                      | `admin`                                |
+| `password`        | Admin password                                      | `prom-operator`                        |
+| `update_interval` | Interval for checking settings in seconds           | `300`                                  |
+| `retry_interval`  | Interval to retry in case of errors in seconds      | `10`                                   |
 
 ## Safeguards
 
@@ -36,7 +38,7 @@ which includes the grafana Helm chart.
 ```yaml
   extraContainers: |
     - name: alertconfig
-      image: ghcr.io/pflege-de/alertmanager-choice-provisioner:0.1.0
+      image: ghcr.io/foss-pflege-de/alertmanager-choice-provisioner:0.1.0
       env:
     - name: choice
       value: all
@@ -46,10 +48,10 @@ which includes the grafana Helm chart.
           key: admin-user
           name: grafana-credentials
     - name: password
-    valueFrom:
-   secretKeyRef:
-     key: admin-password
-     name: grafana-credentials
+      valueFrom:
+        secretKeyRef:
+          key: admin-password
+          name: grafana-credentials
   ```
 
 ## Sources
