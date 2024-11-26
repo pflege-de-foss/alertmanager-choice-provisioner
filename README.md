@@ -40,18 +40,18 @@ which includes the grafana Helm chart.
     - name: alertconfig
       image: ghcr.io/pflege-de-foss/alertmanager-choice-provisioner:0.1.0
       env:
-    - name: choice
-      value: all
-    - name: username
-      valueFrom:
-        secretKeyRef:
-          key: admin-user
-          name: grafana-credentials
-    - name: password
-      valueFrom:
-        secretKeyRef:
-          key: admin-password
-          name: grafana-credentials
+        - name: choice
+          value: all
+        - name: username
+          valueFrom:
+            secretKeyRef:
+              key: admin-user
+              name: grafana-credentials
+        - name: password
+          valueFrom:
+            secretKeyRef:
+              key: admin-password
+              name: grafana-credentials
   ```
 
 ## Sources
